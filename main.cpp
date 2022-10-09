@@ -5,10 +5,12 @@
 #include <sstream>
 #include <vector>
 #include <windef.h>
+#include <regex>
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
 #include "reader.h"
+#include "curl.h"
 using namespace std; 
 
 int main()
@@ -105,7 +107,7 @@ int main()
 	//FILECOMPILER
 	bool mycore = false;
 	string mycompiler;
-	ifstream settingsfile("settings.fss");
+	ifstream settingsfile("C:\\Users\\Josep\\OneDrive\\Desktop\\files\\targetfile.eset");
 	while (getline(settingsfile, mycompiler)) {
 		if (mycompiler.find("main") != string::npos) { 
 			cout << mycompiler << endl;
@@ -142,15 +144,64 @@ int main()
 			string code = subcommandp;
 			system(code.c_str());
 		}
-		if (mycompiler.find("run.admin") != string::npos) {
+		if (mycompiler.find("admin.main") != string::npos) {
 			cout << mycompiler << endl;
 			string f = mycompiler;
 			int posf = f.find(":");
 			string subf = f.substr(posf + 1);
 			ShellExecuteA(NULL, "runas", subf.c_str(), 0, 0, SW_SHOWNORMAL);
 		}
+		if (mycompiler.find("mov") != string::npos) {
+			cout << mycompiler << endl;
+			string f = mycompiler;
+			auto start = ":"s;
+			auto end = ">"s;
+			std::regex base_regex(start + "(.*)" + end);
+			auto example = mycompiler;
+			std::smatch base_match;
+			std::string matched;
+			if (std::regex_search(example, base_match, base_regex)) {
+				if (base_match.size() == 2) {
+					matched = base_match[1].str();
+				}
+			}
+			int posnew = f.find(">");
+			string subnew = f.substr(posnew + 1);
+			cout << matched+"\n";
+			cout << subnew+"\n";
+			ifstream infile(matched);
+			ofstream outfile(subnew);
+			string content = "";
+			int i;
+
+			for (i = 0; !infile.eof(); i++)    
+				content += infile.get();
+			infile.close();
+
+			content.erase(content.end() - 1);  
+			i--;
+
+			cout << i << " characters read...\n";
+
+			outfile << content;         
+			outfile.close();
+			return 0;
+		}
 		if (mycompiler.find("openweb") != string::npos) {
 			cout << mycompiler << endl;
+		}
+		if (mycompiler.find("makefile") != string::npos) {
+			cout << mycompiler << endl;
+			string makefile = mycompiler;
+			int posmakefile = makefile.find(":");
+			string submakefile = makefile.substr(posmakefile + 1);
+			ofstream newfile(submakefile);
+		}
+		if (mycompiler.find("del") != string::npos) {//Using same string names becuase I can LOL
+			string del = mycompiler;
+			int posdel = del.find(":");
+			string subdel = del.substr(posdel + 1);
+			remove(subdel.c_str());
 		}
 		if (mycompiler.find("os") != string::npos) {
 			cout << mycompiler << endl;
@@ -164,7 +215,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
 				}
 
 			}
@@ -175,7 +226,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
 				}
 			}
 			else if (sub == "all") {
@@ -188,7 +239,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
 				}
 			}
 			else if (sub == "winxp") {
@@ -198,7 +249,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
 				}
 			}
 			else if (sub == "winvista") {
@@ -208,7 +259,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
 				}
 
 			}
@@ -219,7 +270,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
 				}
 			}
 			else if (sub == "win11") {
@@ -229,12 +280,12 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible ", L"FSS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible ", L"ESS os Error", MB_ICONERROR | MB_OK);
 				}
 
 			}
 			else {
-				MessageBox(NULL, L"Not a Valid Windows OS", L"FSS os Error", MB_ICONERROR | MB_OK);
+				MessageBox(NULL, L"Not a Valid Windows OS", L"ESS os Error", MB_ICONERROR | MB_OK);
 			}
 		}
 		if (mycompiler.find("showcon") != string::npos) {
@@ -253,6 +304,6 @@ int main()
 			}
 		}
 	}
-	//CLEAN UP
 	remove("pip.bat");
+	//CLEAN UP
 }
