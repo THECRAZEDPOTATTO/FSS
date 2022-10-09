@@ -63,3 +63,19 @@ Using the command:
 showcon:True/False
 ```
 Will hide or show the setup windows
+
+## Removing Files
+ The command ```del:FILE``` will remove files in the project environment
+
+## Copying Files 
+using the following command will copy text from file to another one:
+```cmd
+mov:FILE1>FILE2
+```
+
+## Making Files
+
+To make a new file using the follow command: 
+```cmd
+makefile:FILE.txt
+```
