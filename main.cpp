@@ -105,7 +105,7 @@ int main()
 	//FILECOMPILER
 	bool mycore = false;
 	string mycompiler;
-	ifstream settingsfile("C:\\Users\\Josep\\OneDrive\\Desktop\\files\\targetfile.eset");
+	ifstream settingsfile("settings.fss");
 	while (getline(settingsfile, mycompiler)) {
 		if (mycompiler.find("main") != string::npos) { 
 			cout << mycompiler << endl;
