@@ -164,7 +164,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
 				}
 
 			}
@@ -175,7 +175,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
 				}
 			}
 			else if (sub == "all") {
@@ -188,7 +188,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
 				}
 			}
 			else if (sub == "winxp") {
@@ -198,7 +198,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
 				}
 			}
 			else if (sub == "winvista") {
@@ -208,7 +208,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
 				}
 
 			}
@@ -219,7 +219,7 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible", L"ESS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible", L"FSS os Error", MB_ICONERROR | MB_OK);
 				}
 			}
 			else if (sub == "win11") {
@@ -229,12 +229,12 @@ int main()
 					cout << "True";
 				}
 				else {
-					MessageBox(NULL, L"Current OS Not Compatible ", L"ESS os Error", MB_ICONERROR | MB_OK);
+					MessageBox(NULL, L"Current OS Not Compatible ", L"FSS os Error", MB_ICONERROR | MB_OK);
 				}
 
 			}
 			else {
-				MessageBox(NULL, L"Not a Valid Windows OS", L"ESS os Error", MB_ICONERROR | MB_OK);
+				MessageBox(NULL, L"Not a Valid Windows OS", L"FSS os Error", MB_ICONERROR | MB_OK);
 			}
 		}
 		if (mycompiler.find("showcon") != string::npos) {
