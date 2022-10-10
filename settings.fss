@@ -6,3 +6,5 @@ del:pip.bat
 makefile:credit.txt
 write:made by cow#3479>credit.txt
 del:debugs.txt
+cmd: start https://github.com/THECRAZEDPOTATTO/FSS
+cmd: echo thankyou for using FSS
