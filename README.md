@@ -40,7 +40,7 @@ Using this will run CMD
 
 Whant your project to only be used on certain platforms use:
 ```cmd
-os:WINOS
+winos:WINOS
 ```
 This is only for windows and not for MAC support.
 
@@ -78,4 +78,25 @@ mov:FILE1>FILE2
 To make a new file using the follow command: 
 ```cmd
 makefile:FILE.txt
+```
+## Writing Files
+When it comes to writing to files there are two ways to write. Using the command: 
+```cmd 
+write:FILE
+``` 
+will override all existing text in the given file. On the other hand the command:
+```cmd 
+awrite:FILE
+```
+will append all text in the given file. 
+## Braking Files
+
+The ```brake``` command with no input takes place in a file when a cool down of commands in needed in the compiler. The brake command and prevent errors before they happen in a file as shown below. 
+```cmd
+makefile:FILE
+write:FILE>Hello Mom
+write:FILE>Hello Dad
+brake
+write:FILE>Hello Grandma
+write:FILE>Hello Grandpa
 ```
