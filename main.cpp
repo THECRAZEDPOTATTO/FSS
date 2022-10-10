@@ -2,9 +2,9 @@
 #include <iostream>
 #include <Windows.h>
 #include <list>
+#include <chrono>
 #include <sstream>
 #include <vector>
-#include <chrono>
 #include <windef.h>
 #include <regex>
 #include <iostream>
@@ -22,7 +22,7 @@ int main()
 	int winvistap = IsWindowsVistaOrGreater();
 	int winxpp = IsWindowsXPOrGreater();
 	int server = IsWindowsServer();
-	string s = "os:win11";//int Var before hand to ready compiler!
+	string s = "os:win11";
 	int pos = s.find(":");
 	string sub = s.substr(pos + 1);
 	if (sub == "win10") {
@@ -107,7 +107,7 @@ int main()
 	//FILECOMPILER
 	bool mycore = false;
 	string mycompiler;
-	ifstream settingsfile("settings.fss");//Making Custom files for fss? Try changing this!
+	ifstream settingsfile("C:\\Users\\Josep\\OneDrive\\Desktop\\files\\targetfile.eset");
 	while (getline(settingsfile, mycompiler)) {
 		if (mycompiler.find("main") != string::npos) { 
 			cout << mycompiler << endl;
@@ -240,8 +240,27 @@ int main()
 		}
 		if (mycompiler.find("brake") != string::npos) {
 			cout << mycompiler << endl;
-			this_thread::sleep_for(chrono::milliseconds(10000));//giving compiler 1ms brake time 
-
+			this_thread::sleep_for(chrono::milliseconds(10000));
+		}
+		if (mycompiler.find("make-source") != string::npos) {
+			cout << mycompiler << endl;
+			string ff = mycompiler;
+			auto startff = ":"s;
+			auto endff = ">"s;
+			std::regex base_regex(startff + "(.*)" + endff);
+			auto corewriter = mycompiler;
+			std::smatch base_match;
+			std::string matched;
+			if (std::regex_search(corewriter, base_match, base_regex)) {
+				if (base_match.size() == 2) {
+					matched = base_match[1].str();
+				}
+			}
+			int posnew = ff.find(">");
+			string subnew = ff.substr(posnew + 1);
+			cout << matched + "\n";
+			cout << subnew + "\n";
+			execute("curl "+ subnew, matched);
 		}
 		if (mycompiler.find("openweb") != string::npos) {
 			cout << mycompiler << endl;
@@ -260,7 +279,7 @@ int main()
 			remove(subdel.c_str());
 		}
 		if (mycompiler.find("winos") != string::npos) {
-			cout << mycompiler << endl;//winos to support when writing to home file locos like C://windows or users the have os in their name!
+			cout << mycompiler << endl;
 			string s = mycompiler;
 			int pos = s.find(":");
 			string sub = s.substr(pos + 1);
