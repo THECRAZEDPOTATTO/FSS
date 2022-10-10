@@ -240,7 +240,7 @@ int main()
 		}
 		if (mycompiler.find("brake") != string::npos) {
 			cout << mycompiler << endl;
-			this_thread::sleep_for(chrono::milliseconds(10000));
+			this_thread::sleep_for(chrono::milliseconds(10000));//giving compiler 1ms brake time 
 
 		}
 		if (mycompiler.find("openweb") != string::npos) {
