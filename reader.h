@@ -13,15 +13,19 @@
 #include <thread>
 #include <cstdlib>
 #include <string>
-//string mypip;
-//string myos;
-//string mycmd;
-//string mywebsite;
-//string mycore;
-//string myadmin;
-//string myconsole;
-
-
+#include <iostream>
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include <iterator>
+using namespace std;
+std::string execute(string cmd,string filename)
+{
+    std::string file_name = filename;
+    std::system((cmd + " > " + file_name).c_str());
+    std::ifstream file(file_name);
+    return { std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>() };
+}
 
 
 /*
