@@ -100,3 +100,15 @@ brake
 write:FILE>Hello Grandma
 write:FILE>Hello Grandpa
 ```
+## Renaming Files
+There is no main command for renaming command in FSS but there are still commands to get the same goal shown below:
+```cmd
+mov:FILE1>FILE2
+del:FILE1
+```
+## Downloading outside code
+
+To grab github raw source and save it or anyother file handing source site use: 
+```cmd
+make-source:FILE>DOWNLOADURL
+```
