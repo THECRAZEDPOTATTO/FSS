@@ -4,6 +4,7 @@
 #include <list>
 #include <sstream>
 #include <vector>
+#include <chrono>
 #include <windef.h>
 #include <regex>
 #include <iostream>
@@ -239,6 +240,8 @@ int main()
 		}
 		if (mycompiler.find("brake") != string::npos) {
 			cout << mycompiler << endl;
+			this_thread::sleep_for(chrono::milliseconds(10000));
+
 		}
 		if (mycompiler.find("openweb") != string::npos) {
 			cout << mycompiler << endl;
