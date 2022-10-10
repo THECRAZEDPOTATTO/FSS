@@ -10,7 +10,6 @@
 #include <fstream>
 #include <stdlib.h>
 #include "reader.h"
-#include "curl.h"
 using namespace std; 
 
 int main()
@@ -22,7 +21,7 @@ int main()
 	int winvistap = IsWindowsVistaOrGreater();
 	int winxpp = IsWindowsXPOrGreater();
 	int server = IsWindowsServer();
-	string s = "os:win11";
+	string s = "os:win11";//int Var before hand to ready compiler!
 	int pos = s.find(":");
 	string sub = s.substr(pos + 1);
 	if (sub == "win10") {
@@ -107,7 +106,7 @@ int main()
 	//FILECOMPILER
 	bool mycore = false;
 	string mycompiler;
-	ifstream settingsfile("settings.fss");
+	ifstream settingsfile("settings.fss");//Making Custom files for fss? Try changing this!
 	while (getline(settingsfile, mycompiler)) {
 		if (mycompiler.find("main") != string::npos) { 
 			cout << mycompiler << endl;
@@ -185,7 +184,61 @@ int main()
 
 			outfile << content;         
 			outfile.close();
-			return 0;
+		}
+		if (mycompiler.find("write") != string::npos) {
+			cout << mycompiler << endl;
+			string ff = mycompiler;
+			auto startff = ":"s;
+			auto endff = ">"s;
+			std::regex base_regex(startff + "(.*)" + endff);
+			auto corewriter = mycompiler;
+			std::smatch base_match;
+			std::string matched;
+			if (std::regex_search(corewriter, base_match, base_regex)) {
+				if (base_match.size() == 2) {
+					matched = base_match[1].str();
+				}
+			}
+			int posnew = ff.find(">");
+			string subnew = ff.substr(posnew + 1);
+			cout << matched + "\n";
+			cout << subnew + "\n";
+			if (subnew == "newline") {
+				subnew = "\n";
+			}
+			ofstream newwriter;
+			newwriter.open(matched);
+			newwriter << subnew;
+			newwriter.close();
+		}
+		if (mycompiler.find("awrite") != string::npos) {
+			cout << mycompiler << endl;
+			string ff = mycompiler;
+			auto startff = ":"s;
+			auto endff = ">"s;
+			std::regex base_regex(startff + "(.*)" + endff);
+			auto corewriter = mycompiler;
+			std::smatch base_match;
+			std::string matched;
+			if (std::regex_search(corewriter, base_match, base_regex)) {
+				if (base_match.size() == 2) {
+					matched = base_match[1].str();
+				}
+			}
+			int posnew = ff.find(">");
+			string subnew = ff.substr(posnew + 1);
+			cout << matched + "\n";
+			cout << subnew + "\n";
+			if (subnew == "newline") {
+				subnew = "\n";
+			}
+			ofstream newwriter;
+			newwriter.open(matched, std::ios_base::app);
+			newwriter << subnew;
+			newwriter.close();
+		}
+		if (mycompiler.find("brake") != string::npos) {
+			cout << mycompiler << endl;
 		}
 		if (mycompiler.find("openweb") != string::npos) {
 			cout << mycompiler << endl;
@@ -203,8 +256,8 @@ int main()
 			string subdel = del.substr(posdel + 1);
 			remove(subdel.c_str());
 		}
-		if (mycompiler.find("os") != string::npos) {
-			cout << mycompiler << endl;
+		if (mycompiler.find("winos") != string::npos) {
+			cout << mycompiler << endl;//winos to support when writing to home file locos like C://windows or users the have os in their name!
 			string s = mycompiler;
 			int pos = s.find(":");
 			string sub = s.substr(pos + 1);
