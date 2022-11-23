@@ -13,6 +13,8 @@ FSS is like MAKE Files but for your projects and environments using .fss files.
 
 3) Run the FSS compiler or runner for scripting 
 
+4) Eset the the executable settings file this the fss interpreter
+
 ## FSS Basic Code and Commands
  the most important command in FSS is the:
  ```cmd
