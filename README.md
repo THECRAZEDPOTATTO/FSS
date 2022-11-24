@@ -72,17 +72,6 @@ will override all existing text in the given file. On the other hand the command
 awrite:FILE
 ```
 will append all text in the given file. 
-## Braking Files
-
-The ```brake``` command with no input takes place in a file when a cool down of commands in needed in the compiler. The brake command and prevent errors before they happen in a file as shown below. 
-```cmd
-makefile:FILE
-write:FILE>Hello Mom
-write:FILE>Hello Dad
-brake
-write:FILE>Hello Grandma
-write:FILE>Hello Grandpa
-```
 ## Renaming Files
 There is no main command for renaming command in FSS but there are still commands to get the same goal shown below:
 ```cmd
@@ -107,3 +96,4 @@ To print text on the screen use:
 ```
 print:TEXT
 ```
+
