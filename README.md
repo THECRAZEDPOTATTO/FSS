@@ -95,3 +95,15 @@ To grab github raw source and save it or anyother file handing source site use:
 ```cmd
 make-source:FILE>DOWNLOADURL
 ```
+
+## Title Console
+To add a title to the console use:
+```cmd 
+title: NAME
+```
+
+## Print
+To print text on the screen use:
+```
+print:TEXT
+```
