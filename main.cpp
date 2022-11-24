@@ -119,7 +119,8 @@ int main(int count,char* arg[])
 			i--;
 			outfile << content;         
 			outfile.close();
-		}
+		}	
+	
 		if (mycompiler.find("write") != string::npos) {
 			string ff = mycompiler;
 			auto startff = ":"s;
@@ -200,12 +201,21 @@ int main(int count,char* arg[])
 			int pos = x.find(":");//*BASE LINE READER
 			string sub = x.substr(pos + 1);
 			cout << sub << endl;
-		}//create_directories("sandbox/1/2/a");
+		}//create_directories();
 	    if (mycompiler.find("mkdir") != string::npos) {
 			string x = mycompiler;
 			int pos = x.find(":");//*BASE LINE READER
 			string sub = x.substr(pos + 1);
 			create_directories(sub);
+		}
+		 if (mycompiler.find("cbuild") != string::npos) {
+			string x = mycompiler;
+			int pos = x.find(":");//*BASE LINE READER
+			string sub = x.substr(pos + 1);
+			size_t lastindex = sub.find_last_of("."); 
+			string realname = sub.substr(0, lastindex); 
+			string gpp = "g++ -o "+realname+".exe "+sub; 
+			system(gpp.c_str());
 		}
         if (mycompiler.find("sleep") != string::npos) {
             string sleep = mycompiler;
