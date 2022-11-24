@@ -14,10 +14,9 @@
 #include <filesystem>
 using namespace std; 
 using namespace filesystem;
-
-int main()
+int main(int count,char* arg[])
 {
-	
+	int counter;
 	int win10p = IsWindows10OrGreater();
 	int win7p = IsWindows7OrGreater();
 	int win8p = IsWindows8OrGreater();
@@ -27,7 +26,32 @@ int main()
 	//FILECOMPILER
 	bool mycore = false;
 	string mycompiler;
-	ifstream settingsfile("settings.fss");
+	 if(count>=2)
+    {
+        for(counter=0;counter<count;counter++)
+            cout << "";
+    }else{
+		cout << "Error: Invalid Command Line Arguments" << endl;
+		exit(1);
+	}
+	ifstream checksum;
+	checksum.open(arg[1]);
+	if(checksum){
+	cout<<"";
+	} else {
+		cout << arg[1] <<" doesn't exist!" << endl;
+		exit(1);
+	}
+	path filePath = arg[1];
+    if (filePath.extension() == ".fss") 
+    {
+        cout  << ""; 
+    }
+    else
+    {
+        cout << filePath.filename() << " is not an FSS file!" << endl; 
+    }
+	ifstream settingsfile(arg[1]);
 	while (getline(settingsfile, mycompiler)) {
 		if (mycompiler.find("main") != string::npos) { 
 			string f = mycompiler;
@@ -220,3 +244,7 @@ int main()
 	remove("pip.bat");
 	//CLEAN UP
 }
+ //TODO: Add ESCEL Script to FSS
+ //TODO: Add Let function 
+ //TODO: Update/Push new exe to github
+ 
