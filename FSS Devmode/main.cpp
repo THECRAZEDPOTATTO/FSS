@@ -48,6 +48,7 @@ int main(int count,char* arg[])
     }
 	string mycompiler;
 	ifstream settingsfile(arg[1]);
+	cout << arg[1] << endl;
 	while (getline(settingsfile, mycompiler)) {
 		if (mycompiler.find("main") != string::npos) { 
 			string f = mycompiler;
@@ -219,9 +220,10 @@ int main(int count,char* arg[])
 						int pos = x.find(":");//*BASE LINE READER
 						string sub = x.substr(pos + 1);
 						if(sub == "g++"||sub =="G++"||sub == "gpp"){
-							cout << "G++ compiler" << endl;
+							cout << "g++ compiler" << endl;
 							comtype = "g++";
 						}else if (sub == "gcc"||sub == "GCC"){
+							cout << "gcc compiler" << endl;
 							comtype = "gcc";
 						}else{
 							cout << "Not a supported Compiler" << endl;
