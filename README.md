@@ -38,25 +38,6 @@ cmd:MY COMMANDS
 ```
 Using this will run CMD 
 
-## Windows OS Support with FSS
-
-Whant your project to only be used on certain platforms use:
-```cmd
-winos:WINOS
-```
-This is only for windows and not for MAC support.
-
-The following Windows platforms are supported in FSS format:
-```cmd
-win10
-win11
-win7
-win8
-winxp
-winserver
-winvista
-and(or) all
-```
 
 ## Hiding Script pop up with FSS
 
