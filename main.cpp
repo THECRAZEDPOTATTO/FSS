@@ -12,20 +12,15 @@
 #include <stdlib.h>
 #include "reader.h"
 #include <filesystem>
+#define _CRTDBG_MAP_ALLOC
+#include <crtdbg.h>
 using namespace std; 
 using namespace filesystem;
 int main(int count,char* arg[])
 {
-	int counter;
-	int win10p = IsWindows10OrGreater();
-	int win7p = IsWindows7OrGreater();
-	int win8p = IsWindows8OrGreater();
-	int winvistap = IsWindowsVistaOrGreater();
-	int winxpp = IsWindowsXPOrGreater();
-	int server = IsWindowsServer();			
+	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
+	int counter;			
 	//FILECOMPILER
-	bool mycore = false;
-	string mycompiler;
 	 if(count>=2)
     {
         for(counter=0;counter<count;counter++)
@@ -51,6 +46,7 @@ int main(int count,char* arg[])
     {
         cout << filePath.filename() << " is not an FSS file!" << endl; 
     }
+	string mycompiler;
 	ifstream settingsfile(arg[1]);
 	while (getline(settingsfile, mycompiler)) {
 		if (mycompiler.find("main") != string::npos) { 
@@ -64,12 +60,12 @@ int main(int count,char* arg[])
 			string pip = mycompiler;
 			int pospip = pip.find(":");
 			string subpip = pip.substr(pospip + 1);
-			std::string ss = subpip;
-			std::string delimiter = ",";
+			string ss = subpip;
+			string delimiter = ",";
 			size_t poss = 0;
-			std::string token;
+			string token;
 			ofstream batch("pip.bat");
-			while ((poss = ss.find(delimiter)) != std::string::npos) {
+			while ((poss = ss.find(delimiter)) != string::npos) {
 				token = ss.substr(0, poss);
 				batch << "py -m pip install " + token + "\n";
 				ss.erase(0, poss + delimiter.length());
@@ -95,11 +91,11 @@ int main(int count,char* arg[])
 			string f = mycompiler;
 			auto start = ":"s;
 			auto end = ">"s;
-			std::regex base_regex(start + "(.*)" + end);
+			regex base_regex(start + "(.*)" + end);
 			auto example = mycompiler;
-			std::smatch base_match;
-			std::string matched;
-			if (std::regex_search(example, base_match, base_regex)) {
+			smatch base_match;
+			string matched;
+			if (regex_search(example, base_match, base_regex)) {
 				if (base_match.size() == 2) {
 					matched = base_match[1].str();
 				}
@@ -125,11 +121,11 @@ int main(int count,char* arg[])
 			string ff = mycompiler;
 			auto startff = ":"s;
 			auto endff = ">"s;
-			std::regex base_regex(startff + "(.*)" + endff);
+			regex base_regex(startff + "(.*)" + endff);
 			auto corewriter = mycompiler;
-			std::smatch base_match;
-			std::string matched;
-			if (std::regex_search(corewriter, base_match, base_regex)) {
+			smatch base_match;
+			string matched;
+			if (regex_search(corewriter, base_match, base_regex)) {
 				if (base_match.size() == 2) {
 					matched = base_match[1].str();
 				}
@@ -148,11 +144,11 @@ int main(int count,char* arg[])
 			string ff = mycompiler;
 			auto startff = ":"s;
 			auto endff = ">"s;
-			std::regex base_regex(startff + "(.*)" + endff);
+			regex base_regex(startff + "(.*)" + endff);
 			auto corewriter = mycompiler;
-			std::smatch base_match;
-			std::string matched;
-			if (std::regex_search(corewriter, base_match, base_regex)) {
+			smatch base_match;
+			string matched;
+			if (regex_search(corewriter, base_match, base_regex)) {
 				if (base_match.size() == 2) {
 					matched = base_match[1].str();
 				}
@@ -163,7 +159,7 @@ int main(int count,char* arg[])
 				subnew = "\n";
 			}
 			ofstream newwriter;
-			newwriter.open(matched, std::ios_base::app);
+			newwriter.open(matched, ios_base::app);
 			newwriter << subnew;
 			newwriter.close();
 		}
@@ -174,11 +170,11 @@ int main(int count,char* arg[])
 			string ff = mycompiler;
 			auto startff = ":"s;
 			auto endff = ">"s;
-			std::regex base_regex(startff + "(.*)" + endff);
+			regex base_regex(startff + "(.*)" + endff);
 			auto corewriter = mycompiler;
-			std::smatch base_match;
-			std::string matched;
-			if (std::regex_search(corewriter, base_match, base_regex)) {
+			smatch base_match;
+			string matched;
+			if (regex_search(corewriter, base_match, base_regex)) {
 				if (base_match.size() == 2) {
 					matched = base_match[1].str();
 				}
@@ -189,6 +185,9 @@ int main(int count,char* arg[])
 		}
 		if (mycompiler.find("openweb") != string::npos) {
 			cout << mycompiler << endl;
+		}
+		if (mycompiler.find("c-compiler") != string::npos) {
+			cout << "";
 		}
 		if (mycompiler.find("title") != string::npos) {
 			string title = mycompiler;
@@ -209,13 +208,39 @@ int main(int count,char* arg[])
 			create_directories(sub);
 		}
 		 if (mycompiler.find("cbuild") != string::npos) {
+			string cmake;
+			string comtype;
+			string compilercmd;
+			ifstream cmakefile(arg[1]);
+				while(getline(cmakefile, cmake)) {
+					if (cmake.find("c-compiler") != string::npos) {
+						string x = cmake;
+						int pos = x.find(":");//*BASE LINE READER
+						string sub = x.substr(pos + 1);
+						if(sub == "g++"||sub =="G++"||sub == "gpp"){
+							comtype = "g++";
+						}else if (sub == "gcc"||sub == "GCC"){
+							comtype = "gcc";
+						}else{
+							cout << "Not a supported Compiler" << endl;
+							exit(1);
+						}
+					}
+				}
 			string x = mycompiler;
 			int pos = x.find(":");//*BASE LINE READER
 			string sub = x.substr(pos + 1);
 			size_t lastindex = sub.find_last_of("."); 
 			string realname = sub.substr(0, lastindex); 
-			string gpp = "g++ -o "+realname+".exe "+sub; 
-			system(gpp.c_str());
+			if(comtype == "g++"){
+				compilercmd = "g++ -o "+realname+".exe "+sub; 
+			}else if(comtype == "gcc"){
+				compilercmd =  "gcc -c "+sub;
+			}else{
+				cout << "Could Not Identify Compiler Command" << endl;
+			}
+			cout << compilercmd << endl;//*Devtool command for compiler
+			system(compilercmd.c_str());
 		}
         if (mycompiler.find("sleep") != string::npos) {
             string sleep = mycompiler;
