@@ -12,13 +12,10 @@
 #include <stdlib.h>
 #include "reader.h"
 #include <filesystem>
-#define _CRTDBG_MAP_ALLOC
-#include <crtdbg.h>
 using namespace std; 
 using namespace filesystem;
 int main(int count,char* arg[])
 {
-	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 	int counter;			
 	//FILECOMPILER
 	 if(count>=2)
