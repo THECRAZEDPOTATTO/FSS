@@ -11,8 +11,10 @@
 #include <fstream>
 #include <stdlib.h>
 #include "reader.h"
+#include <filesystem>
 using namespace std; 
-//NEW: Linux optimized
+using namespace filesystem;
+
 int main()
 {
 	
@@ -162,6 +164,24 @@ int main()
 		}
 		if (mycompiler.find("openweb") != string::npos) {
 			cout << mycompiler << endl;
+		}
+		if (mycompiler.find("title") != string::npos) {
+			string title = mycompiler;
+			int postitle = title.find(":");
+			string subtitle = title.substr(postitle + 1);
+            SetConsoleTitle(subtitle.c_str());
+		}
+	    if (mycompiler.find("print") != string::npos) {
+			string x = mycompiler;
+			int pos = x.find(":");//*BASE LINE READER
+			string sub = x.substr(pos + 1);
+			cout << sub << endl;
+		}//create_directories("sandbox/1/2/a");
+	    if (mycompiler.find("mkdir") != string::npos) {
+			string x = mycompiler;
+			int pos = x.find(":");//*BASE LINE READER
+			string sub = x.substr(pos + 1);
+			create_directories(sub);
 		}
         if (mycompiler.find("sleep") != string::npos) {
             string sleep = mycompiler;
