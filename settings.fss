@@ -4,7 +4,7 @@ print: Downloading FSS
 make-source:main.cpp>https://raw.githubusercontent.com/THECRAZEDPOTATTO/FSS/main/main.cpp
 make-source:reader.h>https://raw.githubusercontent.com/THECRAZEDPOTATTO/FSS/main/reader.h
 print:Done
-print:Builder EXE...
+print:Building EXE...
 cbuild:main.cpp
 del:main.cpp
 del.reader.h
