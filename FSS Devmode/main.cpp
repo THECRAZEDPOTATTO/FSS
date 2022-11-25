@@ -10,7 +10,8 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-#include "reader.h"
+#include "command.h"
+#include "messages.h"
 #include <filesystem>
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
@@ -18,7 +19,6 @@ using namespace std;
 using namespace filesystem;
 int main(int count,char* arg[])
 {
-	_CrtSetDbgFlag ( _CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF );
 	int counter;			
 	//FILECOMPILER
 	 if(count>=2)
@@ -26,7 +26,7 @@ int main(int count,char* arg[])
         for(counter=0;counter<count;counter++)
             cout << "";
     }else{
-		cout << "Error: Invalid Command Line Arguments" << endl;
+		errorm,cout << "Invalid Command Line Arguments" << endl;
 		exit(1);
 	}
 	ifstream checksum;
@@ -34,7 +34,7 @@ int main(int count,char* arg[])
 	if(checksum){
 	cout<<"";
 	} else {
-		cout << arg[1] <<" doesn't exist!" << endl;
+		errorm,cout << arg[1] <<" doesn't exist!" << endl;
 		exit(1);
 	}
 	path filePath = arg[1];
@@ -44,11 +44,11 @@ int main(int count,char* arg[])
     }
     else
     {
-        cout << filePath.filename() << " is not an FSS file!" << endl; 
+        errorm,cout << filePath.filename() << " is not an FSS file!" << endl; 
     }
 	string mycompiler;
 	ifstream settingsfile(arg[1]);
-	cout << arg[1] << endl;
+	debugm,cout << arg[1] << endl;
 	while (getline(settingsfile, mycompiler)) {
 		if (mycompiler.find("main") != string::npos) { 
 			string f = mycompiler;
@@ -213,25 +213,25 @@ int main(int count,char* arg[])
 			string comtype;
 			string compilercmd;
 			ifstream cmakefile(arg[1]);
-			cout << arg[1] << endl;
+			debugm,cout << arg[1] << endl;
 				while(getline(cmakefile, cmake)) {
 					if (cmake.find("c-compiler") != string::npos) {
 						string x = cmake;
 						int pos = x.find(":");//*BASE LINE READER
 						string sub = x.substr(pos + 1);
 						if(sub == "g++"||sub =="G++"||sub == "gpp"){
-							cout << "g++ compiler" << endl;
+							debugm,cout << "g++ compiler" << endl;
 							comtype = "g++";
 						}else if (sub == "gcc"||sub == "GCC"){
-							cout << "gcc compiler" << endl;
+							debugm,cout << "gcc compiler" << endl;
 							comtype = "gcc";
 						}else{
-							cout << "Not a supported Compiler" << endl;
+							errorm,cout << "Not a supported Compiler" << endl;
 							exit(1);
 						}
 					}
 				}
-			cout << comtype << endl;
+			debugm,cout << comtype << endl;
 			string x = mycompiler;
 			int pos = x.find(":");//*BASE LINE READER
 			string sub = x.substr(pos + 1);
@@ -242,9 +242,9 @@ int main(int count,char* arg[])
 			}else if(comtype == "gcc"){
 				compilercmd =  "gcc -c "+sub;
 			}else{
-				cout << "Could Not Identify Compiler Command" << endl;
+				errorm,cout << "Could Not Identify Compiler Command" << endl;
 			}
-			cout << compilercmd << endl;//*Devtool command for compiler
+			debugm,cout << compilercmd << endl;//*Devtool command for compiler
 			system(compilercmd.c_str());
 		}
         if (mycompiler.find("sleep") != string::npos) {
@@ -286,5 +286,4 @@ int main(int count,char* arg[])
 }
  //TODO: Add ESCEL Script to FSS
  //TODO: Add Let function 
- //TODO: Update/Push new exe to github
- 
+//TODO: Make IDE
