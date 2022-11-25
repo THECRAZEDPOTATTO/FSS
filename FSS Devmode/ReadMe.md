@@ -8,3 +8,5 @@ FSS DevMode runs like FSS with more or extra features to help with debugging suc
 3) Beta features
 4) Better Compiler Support
 
+## Header Files
+### All Header Files here are the same to normal FSS just the code is differnt
