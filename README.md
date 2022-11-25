@@ -97,3 +97,17 @@ To print text on the screen use:
 print:TEXT
 ```
 
+## Compiling CPP 
+
+To start compiling source files you need to 
+Declare a compiler type using the line: 
+```
+c-compiler: g++/gcc
+```
+doing this will target the type of comand todo when compiling 
+Next you need to compile a file with the command:
+```
+cbuild: FILE.cpp
+``` 
+This will compile the file into a .out file or a .exe with the same name.
+
