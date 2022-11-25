@@ -217,24 +217,20 @@ int main(int count,char* arg[])
 			string comtype;
 			string compilercmd;
 			ifstream cmakefile(arg[1]);
-			debugm,cout << arg[1] << endl;
 				while(getline(cmakefile, cmake)) {
 					if (cmake.find("c-compiler") != string::npos) {
 						string x = cmake;
 						int pos = x.find(":");//*BASE LINE READER
 						string sub = x.substr(pos + 1);
 						if(sub == "g++"||sub =="G++"||sub == "gpp"){
-							debugm,cout << "g++ compiler" << endl;
 							comtype = "g++";
 						}else if (sub == "gcc"||sub == "GCC"){
-							debugm,cout << "gcc compiler" << endl;
 							comtype = "gcc";
 						}else{
 							errorm,cout << "Not a supported Compiler" << endl;
 						}
 					}
 				}
-			debugm,cout << comtype << endl;
 			string x = mycompiler;
 			int pos = x.find(":");//*BASE LINE READER
 			string sub = x.substr(pos + 1);
@@ -242,14 +238,11 @@ int main(int count,char* arg[])
 			string realname = sub.substr(0, lastindex); 
 			if(comtype == "g++"){
 				compilercmd = "g++ -o "+realname+".exe "+sub; 
-				compm,cout << "Compiled " << sub << " --> " << realname << ".exe" << endl;
 			}else if(comtype == "gcc"){
 				compilercmd =  "gcc -c "+sub;
-				compm,cout << "Compiled " << sub << " --> " << realname << ".o" << endl;
 			}else{
 				warnm,cout << "Could Not Identify Compiler Command" << endl;
 			}
-			debugm,cout << compilercmd << endl;//*Devtool command for compiler
 			system(compilercmd.c_str());
 		}
 		 if (mycompiler.find("rsbuild") != string::npos) {
@@ -257,21 +250,18 @@ int main(int count,char* arg[])
 			string comtype;
 			string compilercmd;
 			ifstream cmakefile(arg[1]);
-			debugm,cout << arg[1] << endl;
 				while(getline(cmakefile, cmake)) {
 					if (cmake.find("rs-compiler") != string::npos) {
 						string x = cmake;
 						int pos = x.find(":");//*BASE LINE READER
 						string sub = x.substr(pos + 1);
 						if(sub == "rustc"){
-							debugm,cout << "Rustc compiler" << endl;
 							comtype = "rustc";
 						}else{
 							errorm,cout << "Not a supported Compiler" << endl;
 						}
 					}
 				}
-			debugm,cout << comtype << endl;
 			string x = mycompiler;
 			int pos = x.find(":");//*BASE LINE READER
 			string sub = x.substr(pos + 1);
@@ -279,11 +269,9 @@ int main(int count,char* arg[])
 			string realname = sub.substr(0, lastindex); 
 			if(comtype == "rustc"){
 				compilercmd = "rustc "+sub; 
-				compm,cout << "Compiled " << sub << " --> " << realname << ".exe" << endl;
 			}else{
 				warnm,cout << "Could Not Identify Compiler Command" << endl;
 			}
-			debugm,cout << compilercmd << endl;//*Devtool command for compiler
 			system(compilercmd.c_str());
 		}
         if (mycompiler.find("sleep") != string::npos) {
