@@ -188,7 +188,11 @@ int main(int count,char* arg[])
 			cout << mycompiler << endl;
 		}
 		if (mycompiler.find("c-compiler") != string::npos) {
-			cout << "";
+			cout << "";//!LEAVE BLANK PLACE HOLD FOR LATER
+		}
+		
+		if (mycompiler.find("rs-compiler") != string::npos) {
+			cout << "";//!LEAVE BLANK PLACE HOLD FOR LATER
 		}
 		if (mycompiler.find("title") != string::npos) {
 			string title = mycompiler;
@@ -227,7 +231,6 @@ int main(int count,char* arg[])
 							comtype = "gcc";
 						}else{
 							errorm,cout << "Not a supported Compiler" << endl;
-							exit(1);
 						}
 					}
 				}
@@ -239,10 +242,46 @@ int main(int count,char* arg[])
 			string realname = sub.substr(0, lastindex); 
 			if(comtype == "g++"){
 				compilercmd = "g++ -o "+realname+".exe "+sub; 
+				compm,cout << "Compiled " << sub << " --> " << realname << ".exe" << endl;
 			}else if(comtype == "gcc"){
 				compilercmd =  "gcc -c "+sub;
+				compm,cout << "Compiled " << sub << " --> " << realname << ".o" << endl;
 			}else{
-				errorm,cout << "Could Not Identify Compiler Command" << endl;
+				warnm,cout << "Could Not Identify Compiler Command" << endl;
+			}
+			debugm,cout << compilercmd << endl;//*Devtool command for compiler
+			system(compilercmd.c_str());
+		}
+		 if (mycompiler.find("rsbuild") != string::npos) {
+			string cmake;
+			string comtype;
+			string compilercmd;
+			ifstream cmakefile(arg[1]);
+			debugm,cout << arg[1] << endl;
+				while(getline(cmakefile, cmake)) {
+					if (cmake.find("rs-compiler") != string::npos) {
+						string x = cmake;
+						int pos = x.find(":");//*BASE LINE READER
+						string sub = x.substr(pos + 1);
+						if(sub == "rustc"){
+							debugm,cout << "Rustc compiler" << endl;
+							comtype = "rustc";
+						}else{
+							errorm,cout << "Not a supported Compiler" << endl;
+						}
+					}
+				}
+			debugm,cout << comtype << endl;
+			string x = mycompiler;
+			int pos = x.find(":");//*BASE LINE READER
+			string sub = x.substr(pos + 1);
+			size_t lastindex = sub.find_last_of("."); 
+			string realname = sub.substr(0, lastindex); 
+			if(comtype == "rustc"){
+				compilercmd = "rustc "+sub; 
+				compm,cout << "Compiled " << sub << " --> " << realname << ".exe" << endl;
+			}else{
+				warnm,cout << "Could Not Identify Compiler Command" << endl;
 			}
 			debugm,cout << compilercmd << endl;//*Devtool command for compiler
 			system(compilercmd.c_str());
