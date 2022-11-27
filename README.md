@@ -111,3 +111,11 @@ cbuild: FILE.cpp
 ``` 
 This will compile the file into a .out file or a .exe with the same name.
 
+## Compiling rust
+
+Compiling with rust is the same as with cpp but the only support compiler so far is rustc. To get started use the following commands:
+```
+rs-compiler:rustc
+rsbuild:main.rs
+```
+
