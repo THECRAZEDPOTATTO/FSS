@@ -119,3 +119,8 @@ rs-compiler:rustc
 rsbuild:main.rs
 ```
 
+## sleeping
+To sleep a set amount of sec use the code:
+```
+sleep:TIME
+```
