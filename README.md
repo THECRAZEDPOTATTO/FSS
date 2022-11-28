@@ -124,3 +124,7 @@ To sleep a set amount of sec use the code:
 ```
 sleep:TIME
 ```
+
+## Debugging 
+
+If you want to debug your fss code use Devmode tools these have debugging features built into the app.
